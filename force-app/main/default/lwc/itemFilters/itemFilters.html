@@ -1,0 +1,36 @@
+<template>
+    <div class="filters-section slds-box slds-box_x-small">
+        <h2 class="slds-text-heading_medium">Filters</h2>
+        <p class="slds-text-body_regular slds-m-bottom_medium">
+            <b>Items Found:</b> {filteredItemCount}
+        </p>
+
+        <div>
+            <h3 class="slds-text-heading_small">Type:</h3>
+            <template for:each={typeOptions} for:item="type">
+                <div key={type.value} class="slds-m-top_small">
+                    <lightning-button
+                            label={type.label}
+                            variant="neutral"
+                            value={type.value}
+                            onclick={handleTypeFilter}>
+                    </lightning-button>
+                </div>
+            </template>
+        </div>
+
+        <div class="slds-m-top_medium">
+            <h3 class="slds-text-heading_small">Family:</h3>
+            <template for:each={familyOptions} for:item="family">
+                <div key={family.value} class="slds-m-top_small">
+                    <lightning-button
+                            label={family.label}
+                            variant="neutral"
+                            value={family.value}
+                            onclick={handleFamilyFilter}>
+                    </lightning-button>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

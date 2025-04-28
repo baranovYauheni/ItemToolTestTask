@@ -1,0 +1,35 @@
+<template>
+    <template if:true={isOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon
+                            icon-name="utility:close"
+                            variant="bare-inverse"
+                            class="slds-modal__close"
+                            onclick={closeModal}>
+                    </lightning-button-icon>
+                    <h2 class="slds-text-heading_medium">Item Details</h2>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium">
+                    <template if:true={item}>
+                        <p><b>Name:</b> {item.Name}</p>
+                        <p><b>Description:</b> {item.Description__c}</p>
+                        <p><b>Type:</b> {item.Type__c}</p>
+                        <p><b>Family:</b> {item.Family__c}</p>
+                        <p><b>Price:</b> {item.Price__c}</p>
+                    </template>
+                    <template if:false={item}>
+                        <p>No details available for this item.</p>
+                    </template>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Close" onclick={closeModal}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

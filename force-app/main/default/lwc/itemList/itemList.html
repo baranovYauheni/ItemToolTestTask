@@ -1,0 +1,41 @@
+<template>
+    <div class="slds-grid slds-wrap slds-gutters">
+        <template if:true={items}>
+            <template for:each={items} for:item="item">
+                <div key={item.Id} class="slds-col slds-size_4-of-12">
+                    <div class="slds-card slds-m-around_small item-card">
+                        <div class="slds-card__body">
+                            <img
+                                    src={item.Image__c}
+                                    alt={item.Name}
+                                    class="slds-m-bottom_small"
+                                    style="width:100%; max-height:150px;"
+                            />
+                            <p><b>{item.Name}</b></p>
+                            <p>{item.Description__c}</p>
+
+                            <div class="slds-button-group">
+                                <lightning-button
+                                        label="Details"
+                                        variant="neutral"
+                                        data-id={item.Id}
+                                        onclick={handleDetails}>
+                                </lightning-button>
+
+                                <lightning-button
+                                        label="Add"
+                                        variant="neutral"
+                                        data-id={item.Id}
+                                        onclick={handleAdd}>
+                                </lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </template>
+        <template if:false={items}>
+            <p>No items found.</p>
+        </template>
+    </div>
+</template>

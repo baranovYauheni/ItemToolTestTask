@@ -1,0 +1,78 @@
+<template>
+    <lightning-card>
+        <div class="top-section slds-grid slds-gutters slds-wrap slds-m-bottom_large">
+            <template if:true={isManager}>
+                <div class="slds-col slds-size_2-of-12">
+                    <lightning-button
+                            label="Create Item"
+                            variant="brand"
+                            onclick={openFlowModal}>
+                    </lightning-button>
+                </div>
+            </template>
+            <div class="slds-col slds-size_6-of-12 slds-text-align_center">
+                <c-account-header
+                        account-details={accountDetails}>
+                </c-account-header>
+            </div>
+
+            <div class="slds-col slds-size_2-of-12 slds-text-align_right">
+                <lightning-button
+                        label="Cart"
+                        variant="brand"
+                        onclick={openCartModal}>
+                </lightning-button>
+            </div>
+        </div>
+
+        <div class="search-section slds-m-bottom_large">
+            <lightning-input
+                    type="text"
+                    label="Search"
+                    placeholder="Search by Name or Description..."
+                    value={searchQuery}
+                    onchange={handleSearch}>
+            </lightning-input>
+        </div>
+
+        <div class="main-content slds-grid slds-gutters slds-wrap">
+            <div class="slds-col slds-size_8-of-12">
+                <c-item-list
+                        items={filteredItems}
+                        onshowdetails={handleDetails}
+                        onaddtocart={handleAdd}>
+                </c-item-list>
+            </div>
+
+            <div class="slds-col slds-size_4-of-12">
+                <c-item-filters
+                        family-options={familyOptions}
+                        type-options={typeOptions}
+                        filtered-item-count={filteredItems.length}
+                        onfilterfamilychange={handleFamilyChange}
+                        onfiltertypechange={handleTypeChange}>
+                </c-item-filters>
+            </div>
+        </div>
+
+        <c-cart-modal
+                is-open={isCartModalOpen}
+                cart-items={cartItems}
+                onclosemodal={closeCartModal}
+                oncheckout={handleCheckout}>
+        </c-cart-modal>
+
+        <c-flow-modal
+                is-open={isFlowModalOpen}
+                flow-api-name="Create_Item_From_LWC_Button"
+                onclosemodal={closeFlowModal}
+                onflowfinished={handleFlowFinished}>
+        </c-flow-modal>
+
+        <c-item-details-modal
+                is-open={isDetailsModalOpen}
+                item={selectedItem}
+                onclosemodal={closeDetailsModal}>
+        </c-item-details-modal>
+    </lightning-card>
+</template>

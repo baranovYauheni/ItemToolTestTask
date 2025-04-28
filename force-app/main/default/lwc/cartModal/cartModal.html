@@ -1,0 +1,51 @@
+<template>
+    <template if:true={isOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon
+                            icon-name="utility:close"
+                            variant="bare-inverse"
+                            class="slds-modal__close"
+                            onclick={closeModal}>
+                    </lightning-button-icon>
+                    <h2 class="slds-text-heading_medium">Cart</h2>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium">
+                    <template if:true={cartItems.length}>
+                        <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                            <thead>
+                            <tr class="slds-text-title_caps">
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Family</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <template for:each={cartItems} for:item="item">
+                                <tr key={item.Id}>
+                                    <td>{item.Name}</td>
+                                    <td>{item.Description__c}</td>
+                                    <td>{item.Type__c}</td>
+                                    <td>{item.Family__c}</td>
+                                </tr>
+                            </template>
+                            </tbody>
+                        </table>
+                    </template>
+                    <template if:false={cartItems.length}>
+                        <p>No items in the cart.</p>
+                    </template>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Close" variant="neutral" onclick={closeModal}></lightning-button>
+                    <lightning-button label="Checkout" variant="brand" onclick={checkoutCart}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
